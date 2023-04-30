@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=block" rel="stylesheet">
+    <title>Lil Shopping List</title>
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="title">
+            <img th:src="@{/images/edit-black.svg}" alt="" class="title-image" />
+            <div>Rename Product</div>
+        </div>
+
+        <form action="#" th:action="@{/products/renameProduct}" th:object="${product}" method="POST" class="rename-product-form">
+            <!-- <input type="hidden" th:field="*{id}" /> -->
+            <input type="hidden" th:field="*{id}" class="rename-product-input" />
+            <input type="hidden" th:field="*{userEmail}" class="rename-product-input" />
+            <input type="text" th:field="*{name}" placeholder="Name" class="rename-product-input" />
+            <button type="submit" class="rename-product-send blue-btn">Rename</button>
+        </form>
+        
+        <a th:href="@{/products/list}" class="back-btn">Back To Products List</a>
+    </div>
+
+    <script th:src="@{/js/rename-product-validator.js}"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=block" rel="stylesheet">
+    <title>Lil Shopping List</title>
+</head>
+<body>
+
+    <div class="container">
+        <div class="title">
+            <img th:src="@{/images/new-product2.svg}" alt="" class="title-image" />
+            <div>New Product</div>
+        </div>
+
+        <form action="#" th:action="@{/products/addNewProduct}" th:object="${product}" method="POST" class="new-product-form">
+            <input type="text" th:field="*{name}" placeholder="Product Name" class="new-product-input" />
+            <button type="submit" class="new-product-send blue-btn">Add</button>
+        </form>
+        
+        <a th:href="@{/products/list}" class="back-btn">Back To Products List</a>
+    </div>
+
+    <script th:src="@{/js/new-product-validator.js}"></script>
+</body>
+</html>
+
+

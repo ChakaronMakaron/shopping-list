@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=block" rel="stylesheet">
+    <title>Lil Shopping List</title>
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="title">
+            <img th:src="@{/images/item.svg}" alt="" class="title-image">
+            <div th:text="${productName}"></div>
+        </div>
+
+        <div class="list mar-top-100">
+            <div th:each="purchaseOption : ${purchaseOptions}" class="list-item">
+                <div th:text="${purchaseOption.shopName}" class="item-name"></div>
+                <div class="actions">
+                    <a th:href="${purchaseOption.link}" target="_blank" class="action action-see"></a>
+                    <a th:href="@{/products/deletePurchaseOption(id=${purchaseOption.id}, productId=${productId})}" class="action action-delete"></a>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${#lists.size(purchaseOptions) == 0}" class="empty-img">
+            <!-- <img th:src="@{/images/empty.png}" alt=""> -->
+        </div>
+
+        <a href="#" th:href="@{/products/addPurchaseOption(id=${productId})}" class="purchase-option-add blue-btn">Add option</a>
+    
+        <a href="#" th:href="@{/products/list}" class="back-btn mar-bot-25">Back</a>
+
+    </div>
+
+</body>
+</html>
+
+

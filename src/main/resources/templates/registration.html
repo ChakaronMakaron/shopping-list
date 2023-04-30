@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ISO-8859-1">
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=block" rel="stylesheet">
+ <title>Lil Shopping List</title>
+</head>
+<body>
+
+  <div class="container">
+
+      <div class="title">
+        <img th:src="@{/images/registration.svg}" alt="" class="title-image">
+        <div>Registration</div>
+      </div>
+
+      <div class="reg-box">
+
+          <!-- bad login message -->
+          <div th:if="${param.registrationFail}">
+              <div class="login-fail">The email is already registered</div>
+          </div>
+
+          <form th:action="@{/registration}" method="POST" th:object="${user}" class="reg-form" novalidate>
+
+              <input id="firstName" class="reg-input-field mar-bot-10" th:field="*{firstName}"
+              required autofocus="autofocus" placeholder="First Name" regex="[A-Za-z]+" />
+      
+              <input id="lastName" class="reg-input-field mar-bot-10" th:field="*{lastName}"
+              required autofocus="autofocus" placeholder="Last Name" regex="[A-Za-z]+" />
+      
+              <input id="email" class="reg-input-field mar-bot-10" th:field="*{email}"
+              required autofocus="autofocus" placeholder="Email" regex="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" />
+      
+              <input id="password" class="reg-input-field mar-bot-10" type="password" th:field="*{password}"
+              required autofocus="autofocus" placeholder="Password" regex=".{1,}" />
+      
+              <button type="submit" class="reg-btn blue-btn">Register</button>
+
+              <a href="#" th:href="@{/loginPage}" class="back-btn mar-bot-25">Back</a>
+
+          </form>
+      </div>
+
+  </div>
+
+  <script th:src="@{/js/registration-validator.js}"></script>
+</body>
+</html>

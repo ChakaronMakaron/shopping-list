@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=block" rel="stylesheet">
+    <title>Lil Shopping List</title>
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="title">
+            <img th:src="@{/images/list.svg}" alt="" class="title-image">
+            <div>Products List</div>
+        </div>
+
+        <div class="container-nav">
+            <a th:href="@{/products/addNewProduct}" class="container-nav-add blue-btn">Add Product</a>
+            <a th:href="@{/logout}" sec:authorize="isAuthenticated()" class="container-nav-logout red-btn">Logout</a>
+        </div>
+
+        <div class="list">
+            <div th:each="product : ${products}" class="list-item">
+                <div th:text="${product.name}" class="item-name"></div>
+                <div class="actions">
+                    <a th:href="@{/products/getPurchaseOptions(id=${product.id})}" class="action action-see-options"></a>
+                    <a th:href="@{/products/renameProduct(id=${product.id})}" class="action action-edit"></a>
+                    <a th:href="@{/products/deleteProduct(id=${product.id})}" class="action action-delete"></a>
+                    <a th:href="@{/products/clearPurchaseOptions(id=${product.id})}" class="action action-clear-options"></a>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${#lists.size(products) == 0}" class="empty-img">
+            <!-- <img th:src="@{/images/empty.png}" alt=""> -->
+        </div>
+
+        <div sec:authorize="isAuthenticated()" class="login-info">
+            Authenticated as <span sec:authentication="name"></span>
+        </div>
+
+    </div>
+
+    <!-- <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.name}" />
+                <td>
+                    <a th:href="@{/products/getPurchaseOptions(id=${product.id})}">
+                        See options
+                    </a>
+                    <a th:href="@{/products/renameProduct(id=${product.id})}">
+                        Rename
+                    </a>
+                    <a th:href="@{/products/deleteProduct(id=${product.id})}">
+                        Delete
+                    </a>
+                    <a th:href="@{/products/clearPurchaseOptions(id=${product.id})}">
+                        Clear options
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table> -->
+
+</body>
+</html>

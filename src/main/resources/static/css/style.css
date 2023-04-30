@@ -1,0 +1,451 @@
+
+body {
+    font-family: "Roboto";
+    font-weight: bold;
+    height: 100vh;
+    display: flex;
+    letter-spacing: 0.9px;
+    background-color: #e1e1ee;
+}
+
+.main {
+    font-size: 32px;
+    line-height: 48px;
+}
+
+.main-button {
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #87BFFF;
+    border-radius: 15px;
+    width: 320px;
+    height: 80px;
+}
+
+.container {
+    position: relative;
+    background-color: white;
+    border-radius: 15px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 700px;
+    min-height: 400px;
+    margin: auto;
+    box-shadow: 0px 0px 10px gray;
+    padding: 5px 20px;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    position: absolute;
+    font-size: 32px;
+    background-color: #696969;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    border-radius: 15px 15px 0px 0px;
+    height: 75px;
+}
+
+.title-image {
+    width: 36px;
+    height: 36px;
+    margin-right: 10px;
+}
+
+.container-nav {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* padding: 0px 20px; */
+    margin: 100px 0px 30px 0px;
+}
+
+.container-nav-add {
+    color: white;
+    text-decoration: none;
+    background-color: #87BFFF;
+    padding: 15px 25px;
+    border-radius: 15px;
+}
+
+.container-nav-logout {
+    color: white;
+    text-decoration: none;
+    background-color: #FF5555;
+    padding: 15px 25px;
+    border-radius: 15px;
+}
+
+.list {
+    width: 100%;
+}
+
+.list-item:nth-child(odd) {
+    background-color: #f5f5f5;
+}
+
+.list-item {
+    display: flex;
+    font-size: 18px;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+}
+
+.action {
+    width: 28px;
+    height: 28px;
+    margin: 0px 4px;
+}
+
+.action-see-options {
+    width: 32px;
+    height: 32px;
+    background: url("../images/see-all-options.svg") no-repeat center;
+}
+
+.action-edit {
+    width: 26px;
+    height: 26px;
+    background: url("../images/edit.svg") no-repeat center;
+}
+
+.action-delete {
+    background: url("../images/delete.svg") no-repeat center;
+}
+
+.action-clear-options {
+    width: 30px;
+    height: 30px;
+    background: url("../images/broom2.svg") no-repeat center;
+}
+
+.action-see {
+    width: 28px;
+    height: 28px;
+    background: url("../images/see.svg") no-repeat center;
+}
+
+.item-name {
+    color: #444444;
+}
+
+.login-info {
+    margin: 45px 0px 25px 0px;
+    color: #909090;
+}
+
+/* Page "new-product" */
+
+.back-btn {
+    color: white;
+    text-decoration: none;
+    background-color: #FBC267;
+    padding: 15px 25px;
+    border-radius: 15px;
+}
+
+.new-product-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+    margin-top: 40px;
+}
+
+.new-product-input {
+    display: block;
+    font: inherit;
+    text-align: center;
+    border-radius: 15px;
+    padding: 5px 25px;
+    border-style: none;
+    box-shadow: 0px 0px 4px gray;
+}
+
+.new-product-send {
+    display: block;
+    font: inherit;
+    width: 100px;
+    padding: 15px 25px;
+    margin-top: 10px;
+    border-color: transparent;
+    background-color: #87BFFF;
+    /* background-color: #95CD84; */
+    border-radius: 15px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Page "rename-product" */
+
+.rename-product-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+    margin-top: 40px;
+}
+
+.rename-product-input {
+    display: block;
+    font: inherit;
+    text-align: center;
+    border-radius: 15px;
+    padding: 5px 25px;
+    border-style: none;
+    box-shadow: 0px 0px 4px gray;
+}
+
+.rename-product-send {
+    display: block;
+    font: inherit;
+    width: fit-content;
+    padding: 15px 25px;
+    margin-top: 10px;
+    border-color: transparent;
+    background-color: #87BFFF;
+    /* background-color: #95CD84; */
+    border-radius: 15px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Page "purchase-options" */
+
+.purchase-option-add {
+    display: block;
+    font: inherit;
+    padding: 15px 25px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    border-color: transparent;
+    background-color: #87BFFF;
+    /* background-color: #95CD84; */
+    border-radius: 15px;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.mar-top-100 {
+    margin-top: 100px;
+}
+
+.mar-top-50 {
+    margin-top: 50px;
+}
+
+.mar-bot-25 {
+    margin-bottom: 25px;
+}
+
+.mar-bot-10 {
+    margin-bottom: 10px;
+}
+
+.mar-bot-10 {
+    margin-bottom: 10px;
+}
+
+.empty-img {
+    width: 200px;
+    height: 200px;
+    background-image: url("../images/empty.png");
+    background-size: contain;
+}
+
+/* Page new Product Option */
+.new-po-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+    margin-top: 40px;
+}
+
+.new-po-input {
+    display: block;
+    font: inherit;
+    text-align: center;
+    border-radius: 15px;
+    padding: 5px 25px;
+    border-style: none;
+    outline: none;
+    box-shadow: 0px 0px 4px gray;
+}
+
+.new-po-send {
+    display: block;
+    font: inherit;
+    width: fit-content;
+    padding: 15px 25px;
+    margin-top: 10px;
+    border-color: transparent;
+    background-color: #87BFFF;
+    /* background-color: #95CD84; */
+    border-radius: 15px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Login */
+
+.login-box {
+    margin-top: 75px;
+    color: #444444;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 360px;
+}
+
+.login-input-area {
+    width: 100%;
+    margin: 25px 0px 15px 0px;
+}
+
+.login-input {
+    display: flex;
+    justify-content: center;
+}
+
+.login-input-field {
+    display: block;
+    font: inherit;
+    text-align: center;
+    border-radius: 15px;
+    padding: 5px 25px;
+    border-style: none;
+    outline: none;
+    box-shadow: 0px 0px 4px gray;
+}
+
+.login-btn {
+    display: block;
+    font: inherit;
+    width: fit-content;
+    padding: 15px 25px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    border-color: transparent;
+    background-color: #87BFFF;
+    /* background-color: #95CD84; */
+    border-radius: 15px;
+    color: white;
+    cursor: pointer;
+}
+
+.login-fail {
+    background-color: #F37B81;
+    padding: 15px 25px;
+    text-align: center;
+}
+
+.logout-success {
+    background-color: #B8F5AD;
+    padding: 15px 25px;
+    text-align: center;
+}
+
+.registration-link {
+    text-decoration: none;
+}
+
+.registration-link-box {
+    margin-bottom: 25px;
+}
+
+/**/
+/**/
+/**/
+/* Registration */
+.reg-box {
+    margin-top: 100px;
+    color: #444444;
+}
+
+.reg-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 360px;
+    margin-top: 25px;
+}
+
+.reg-btn {
+    display: block;
+    font: inherit;
+    width: fit-content;
+    padding: 15px 25px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    border-color: transparent;
+    background-color: #87BFFF;
+    /* background-color: #95CD84; */
+    border-radius: 15px;
+    color: white;
+    cursor: pointer;
+}
+
+.reg-input-field {
+    display: block;
+    font: inherit;
+    text-align: center;
+    border-radius: 15px;
+    padding: 5px 25px;
+    border-style: none;
+    outline: none;
+    box-shadow: 0px 0px 4px gray;
+}
+
+/**/
+/**/
+/**/
+/* Hovers */
+.back-btn:hover {
+    background-color: #FCD699;
+}
+
+.blue-btn:hover {
+    background-color: #AFD4FF;
+}
+
+.red-btn:hover {
+    background-color: #FF8D8D;
+}
+
+/**/
+/**/
+/**/
+/* Validation */
+.bad-input {
+    border-color: #FF5555;
+}
+
+

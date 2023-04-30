@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
+  <link rel="stylesheet" th:href="@{/css/normalize.css}">
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=block" rel="stylesheet">
+  <title>Lil Shopping List</title>
+</head>
+<body>
+
+    <div class="container">
+
+      <div class="title">
+          <img th:src="@{/images/login.svg}" alt="" class="title-image">
+          <div>Login</div>
+      </div>
+
+      <div class="login-box">
+
+          <form th:action="@{/auth}" method="POST" class="login-form">
+
+            <!-- bad login message -->
+            <div th:if="${param.error}">
+                <div class="login-fail">Invalid username or password</div>
+            </div>
+
+            <!-- logout message -->
+            <div th:if="${param.logout}">
+                <div class="logout-success">Successfully logged out</div>
+            </div>
+
+            <!-- registration success -->
+            <div th:if="${param.successfulRegistration}">
+              <div class="logout-success">Successfully registered</div>
+            </div>
+            
+            <div class="login-input-area">
+              <div class="login-input mar-bot-10">
+                  <input type="text" class = "login-input-field" id ="username" name = "username" placeholder="Email" autofocus="autofocus" />
+              </div>
+            
+              <div class="login-input">
+                  <input type="password" id="password" name="password" class="login-input-field" placeholder="Password" />
+              </div>
+            </div>
+            
+            <div>
+                <input type="submit" name="login-submit" id="login-submit" class="login-btn blue-btn" value="Log In" />
+            </div>
+
+            <div class="registration-link-box">
+              <span>New user? <a href="#" th:href="@{/registration}" class="registration-link">Register</a></span>
+            </div>
+
+          </form>
+
+      </div>
+        
+    </div>
+
+    <script th:src="@{/js/login-validator.js}"></script>
+</body>
+</html>
+
