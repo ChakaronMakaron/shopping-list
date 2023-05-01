@@ -11,6 +11,12 @@ public interface ProductRepository {
 
     public ProductEntity getProductById(Integer id);
 
+    public ProductEntity getProductByIdForUpdate(Integer id);
+
+    public PurchaseOptionEntity getPurchaseOptionById(Integer id);
+
+    public void remove(Object entity);
+
     public void saveProduct(ProductEntity product);
 
     public void addPurchaseOptionToProduct(PurchaseOptionEntity purchaseOption, Integer id);
@@ -21,7 +27,7 @@ public interface ProductRepository {
 
     public void deleteProductById(Integer id);
 
-    public void clearPurchaseOptionsById(Integer id);
+    public void clearPurchaseOptionsByProductId(Integer id);
 
-    public void deleteProductOptionById(Integer productOptionId);
+    public void deletePurchaseOptionById(Integer purchaseOptionId);
 }

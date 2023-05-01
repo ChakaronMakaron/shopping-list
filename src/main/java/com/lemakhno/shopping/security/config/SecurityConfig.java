@@ -1,5 +1,6 @@
 package com.lemakhno.shopping.security.config;
 
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,7 +15,7 @@ import com.lemakhno.shopping.constants.Endpoints;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private static final String SECURED_PATHS_PATTERN = "/products/**";
+    private static final String SECURED = "/products/**";
     private static final String COOKIE_JSESSIONID = "JSESSIONID";
 
     @Bean
@@ -22,8 +23,13 @@ public class SecurityConfig {
 		http
         .csrf()
             .disable()
+        .headers()
+            .frameOptions().disable()
+        .and()
         .authorizeHttpRequests()
-		    .antMatchers(SECURED_PATHS_PATTERN)
+            .requestMatchers(PathRequest.toH2Console())
+                .permitAll()
+		    .antMatchers(SECURED)
                 .authenticated()
 		.and()
             .formLogin()

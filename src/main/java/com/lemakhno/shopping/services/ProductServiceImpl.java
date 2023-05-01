@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.lemakhno.shopping.entities.ProductEntity;
 import com.lemakhno.shopping.entities.PurchaseOptionEntity;
@@ -23,7 +25,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductEntity getProductById(Integer id) {
-        return productRepository.getProductById(id);
+        ProductEntity product = productRepository.getProductById(id);
+        checkCrossUserResourceRequest(product.getUserEmail());
+        return product;
     }
 
     @Override
@@ -37,10 +41,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public void addPurchaseOptionToProduct(PurchaseOption purchaseOption, Integer productId) {
+        ProductEntity product = productRepository.getProductByIdForUpdate(productId);
+        checkCrossUserResourceRequest(product.getUserEmail());
         PurchaseOptionEntity purchaseOptionEntity =
             new PurchaseOptionEntity(purchaseOption.getLink(), purchaseOption.getShopName());
-        productRepository.addPurchaseOptionToProduct(purchaseOptionEntity, productId);
+        product.addPurchaseOption(purchaseOptionEntity);
     }
 
     @Override
@@ -49,22 +56,41 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public void renameProductById(Integer id, String newName) {
-        productRepository.renameProductById(id, newName);
+        ProductEntity product = productRepository.getProductByIdForUpdate(id);
+        checkCrossUserResourceRequest(product.getUserEmail());
+        product.setName(newName);
     }
 
     @Override
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public void deleteProductById(Integer id) {
-        productRepository.deleteProductById(id);
+        ProductEntity product = productRepository.getProductByIdForUpdate(id);
+        checkCrossUserResourceRequest(product.getUserEmail());
+        productRepository.remove(product);
     }
 
     @Override
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public void clearPurchaseOptionsById(Integer productId) {
-        productRepository.clearPurchaseOptionsById(productId);
+        ProductEntity product = productRepository.getProductByIdForUpdate(productId);
+        checkCrossUserResourceRequest(product.getUserEmail());
+        productRepository.clearPurchaseOptionsByProductId(productId);
     }
 
     @Override
-    public void deleteProductOptionById(Integer productOptionId) {
-        productRepository.deleteProductOptionById(productOptionId);
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    public void deletePurchaseOptionById(Integer purchaseOptionId) {
+        PurchaseOptionEntity purchaseOption = productRepository.getPurchaseOptionById(purchaseOptionId);
+        checkCrossUserResourceRequest(purchaseOption.getProduct().getUserEmail());
+        productRepository.remove(purchaseOption);
+    }
+
+    private void checkCrossUserResourceRequest(String resourceHolderEmail) {
+        String authEmail = AppUtil.getAuthentication().getName();
+        if (!authEmail.equals(resourceHolderEmail)) {
+            throw new IllegalStateException("Attempted to acess another user's resource");
+        }
     }
 }

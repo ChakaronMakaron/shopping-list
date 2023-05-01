@@ -107,7 +107,7 @@ public class ProductController {
 
     @GetMapping(Endpoints.DELETE_PURCHASE_OPTION)
     public String deletePurchaseOption(@RequestParam("id") Integer productOptionId, @RequestParam("productId") Integer productId) {
-        productService.deleteProductOptionById(productOptionId);
+        productService.deletePurchaseOptionById(productOptionId);
         return String.format(REDIRECT_TO_PURCHASE_OPTIONS, productId);
     }
 }

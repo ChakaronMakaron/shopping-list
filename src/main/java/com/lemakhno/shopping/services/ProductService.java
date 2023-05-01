@@ -22,5 +22,5 @@ public interface ProductService {
 
     public void clearPurchaseOptionsById(Integer productId);
 
-    public void deleteProductOptionById(Integer productOptionId);
+    public void deletePurchaseOptionById(Integer purchaseOptionId);
 }

@@ -1,10 +1,13 @@
 package com.lemakhno.shopping.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +24,9 @@ public class PurchaseOptionEntity {
 
     @Column(name = "shop_name")
     private String shopName;
+
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    private ProductEntity product;
 
     public PurchaseOptionEntity() {}
 
@@ -51,6 +57,14 @@ public class PurchaseOptionEntity {
 
     public void setShopName(String shopName) {
         this.shopName = shopName;
+    }
+
+    public ProductEntity getProduct() {
+        return product;
+    }
+
+    public void setProduct(ProductEntity product) {
+        this.product = product;
     }
 
     @Override
