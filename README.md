@@ -12,7 +12,7 @@ Steps to run in DOCKER:
 Login:
 
 Registration form expects non-null first name and last name,
-valid email (may be fake)
+valid email (may be fake),
 arbitrary password
 
 To avoid registration, it is possible to use embedded user
