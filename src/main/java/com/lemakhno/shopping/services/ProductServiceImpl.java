@@ -3,6 +3,7 @@ package com.lemakhno.shopping.services;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,16 +25,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductEntity getProductById(Integer id) {
+    public ProductEntity getProductById(String id) {
         ProductEntity product = productRepository.getProductById(id);
-        checkCrossUserResourceRequest(product.getUserEmail());
         return product;
     }
 
     @Override
     public void saveProduct(Product product) {
         ProductEntity productEntity = new ProductEntity();
-        productEntity.setId(null);
+        productEntity.setId(generateId());
         productEntity.setName(product.getName());
         productEntity.setUserEmail(AppUtil.getAuthentication().getName());
         productEntity.setPurchaseOptions(Collections.emptyList());
@@ -42,11 +42,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional(isolation = Isolation.READ_COMMITTED)
-    public void addPurchaseOptionToProduct(PurchaseOption purchaseOption, Integer productId) {
+    public void addPurchaseOptionToProduct(PurchaseOption purchaseOption, String productId) {
         ProductEntity product = productRepository.getProductByIdForUpdate(productId);
-        checkCrossUserResourceRequest(product.getUserEmail());
         PurchaseOptionEntity purchaseOptionEntity =
-            new PurchaseOptionEntity(purchaseOption.getLink(), purchaseOption.getShopName());
+            new PurchaseOptionEntity(purchaseOption.getLink(), purchaseOption.getShopName(), generateId());
         product.addPurchaseOption(purchaseOptionEntity);
     }
 
@@ -57,40 +56,32 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional(isolation = Isolation.READ_COMMITTED)
-    public void renameProductById(Integer id, String newName) {
+    public void renameProductById(String id, String newName) {
         ProductEntity product = productRepository.getProductByIdForUpdate(id);
-        checkCrossUserResourceRequest(product.getUserEmail());
         product.setName(newName);
     }
 
     @Override
     @Transactional(isolation = Isolation.READ_COMMITTED)
-    public void deleteProductById(Integer id) {
+    public void deleteProductById(String id) {
         ProductEntity product = productRepository.getProductByIdForUpdate(id);
-        checkCrossUserResourceRequest(product.getUserEmail());
         productRepository.remove(product);
     }
 
     @Override
     @Transactional(isolation = Isolation.READ_COMMITTED)
-    public void clearPurchaseOptionsById(Integer productId) {
-        ProductEntity product = productRepository.getProductByIdForUpdate(productId);
-        checkCrossUserResourceRequest(product.getUserEmail());
+    public void clearPurchaseOptionsById(String productId) {
         productRepository.clearPurchaseOptionsByProductId(productId);
     }
 
     @Override
     @Transactional(isolation = Isolation.READ_COMMITTED)
-    public void deletePurchaseOptionById(Integer purchaseOptionId) {
+    public void deletePurchaseOptionById(String purchaseOptionId) {
         PurchaseOptionEntity purchaseOption = productRepository.getPurchaseOptionById(purchaseOptionId);
-        checkCrossUserResourceRequest(purchaseOption.getProduct().getUserEmail());
         productRepository.remove(purchaseOption);
     }
 
-    private void checkCrossUserResourceRequest(String resourceHolderEmail) {
-        String authEmail = AppUtil.getAuthentication().getName();
-        if (!authEmail.equals(resourceHolderEmail)) {
-            throw new IllegalStateException("Attempted to acess another user's resource");
-        }
+    private String generateId() {
+        return RandomStringUtils.randomAlphanumeric(15);
     }
 }

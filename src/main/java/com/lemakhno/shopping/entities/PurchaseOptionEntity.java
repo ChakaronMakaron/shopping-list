@@ -4,8 +4,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -15,9 +13,8 @@ import javax.persistence.Table;
 public class PurchaseOptionEntity {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private String id;
 
     @Column(name = "link")
     private String link;
@@ -30,16 +27,17 @@ public class PurchaseOptionEntity {
 
     public PurchaseOptionEntity() {}
 
-    public PurchaseOptionEntity(String link, String shopName) {
+    public PurchaseOptionEntity(String link, String shopName, String id) {
         this.link = link;
         this.shopName = shopName;
+        this.id = id;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

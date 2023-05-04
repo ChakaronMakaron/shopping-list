@@ -8,19 +8,19 @@ import com.lemakhno.shopping.models.PurchaseOption;
 
 public interface ProductService {
 
-    public ProductEntity getProductById(Integer id);
+    public ProductEntity getProductById(String id);
 
     public void saveProduct(Product product);
 
-    public void addPurchaseOptionToProduct(PurchaseOption purchaseOption, Integer productId);
+    public void addPurchaseOptionToProduct(PurchaseOption purchaseOption, String productId);
 
     public List<ProductEntity> getProductsByUserEmail(String email);
 
-    public void renameProductById(Integer id, String newName);
+    public void renameProductById(String id, String newName);
 
-    public void deleteProductById(Integer id);
+    public void deleteProductById(String id);
 
-    public void clearPurchaseOptionsById(Integer productId);
+    public void clearPurchaseOptionsById(String productId);
 
-    public void deletePurchaseOptionById(Integer purchaseOptionId);
+    public void deletePurchaseOptionById(String purchaseOptionId);
 }

@@ -7,8 +7,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -19,9 +17,8 @@ import javax.persistence.Table;
 public class ProductEntity {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private String id;
 
     @Column(name = "name")
     private String name;
@@ -35,16 +32,17 @@ public class ProductEntity {
 
     public ProductEntity() {}
 
-    public ProductEntity(String name, String userEmail) {
+    public ProductEntity(String name, String userEmail, String id) {
         this.name = name;
         this.userEmail = userEmail;
+        this.id = id;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -79,7 +77,7 @@ public class ProductEntity {
 
     @Override
     public String toString() {
-        return "Product [id=" + id + ", name=" + name + ", purchaseOptions=" + purchaseOptions + ", userEmail="
-                + userEmail + "]";
+        return "ProductEntity [id=" + id + ", name=" + name + ", userEmail=" + userEmail + ", purchaseOptions="
+                + purchaseOptions + "]";
     }
 }

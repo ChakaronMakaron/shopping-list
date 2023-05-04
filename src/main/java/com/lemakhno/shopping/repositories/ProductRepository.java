@@ -9,25 +9,25 @@ public interface ProductRepository {
     
     public List<ProductEntity> getAllProducts();
 
-    public ProductEntity getProductById(Integer id);
+    public ProductEntity getProductById(String id);
 
-    public ProductEntity getProductByIdForUpdate(Integer id);
+    public ProductEntity getProductByIdForUpdate(String id);
 
-    public PurchaseOptionEntity getPurchaseOptionById(Integer id);
+    public PurchaseOptionEntity getPurchaseOptionById(String id);
 
     public void remove(Object entity);
 
     public void saveProduct(ProductEntity product);
 
-    public void addPurchaseOptionToProduct(PurchaseOptionEntity purchaseOption, Integer id);
+    public void addPurchaseOptionToProduct(PurchaseOptionEntity purchaseOption, String id);
 
     public List<ProductEntity> getProductsByUserEmail(String email);
 
-    public void renameProductById(Integer id, String newName);
+    public void renameProductById(String id, String newName);
 
-    public void deleteProductById(Integer id);
+    public void deleteProductById(String id);
 
-    public void clearPurchaseOptionsByProductId(Integer id);
+    public void clearPurchaseOptionsByProductId(String id);
 
-    public void deletePurchaseOptionById(Integer purchaseOptionId);
+    public void deletePurchaseOptionById(String purchaseOptionId);
 }

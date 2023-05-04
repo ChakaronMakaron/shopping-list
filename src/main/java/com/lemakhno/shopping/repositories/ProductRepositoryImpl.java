@@ -30,7 +30,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public PurchaseOptionEntity getPurchaseOptionById(Integer id) {
+    public PurchaseOptionEntity getPurchaseOptionById(String id) {
         return entityManager.find(PurchaseOptionEntity.class, id);
     }
 
@@ -42,12 +42,12 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public ProductEntity getProductById(Integer id) {
+    public ProductEntity getProductById(String id) {
         return entityManager.find(ProductEntity.class, id);
     }
 
     @Override
-    public ProductEntity getProductByIdForUpdate(Integer id) {
+    public ProductEntity getProductByIdForUpdate(String id) {
         return entityManager.find(ProductEntity.class, id, LockModeType.PESSIMISTIC_WRITE);
     }
     
@@ -57,7 +57,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public void addPurchaseOptionToProduct(PurchaseOptionEntity purchaseOption, Integer id) {
+    public void addPurchaseOptionToProduct(PurchaseOptionEntity purchaseOption, String id) {
         ProductEntity product = entityManager.find(ProductEntity.class, id);
         product.addPurchaseOption(purchaseOption);
     }
@@ -70,26 +70,26 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public void renameProductById(Integer id, String newName) {
+    public void renameProductById(String id, String newName) {
         ProductEntity product = entityManager.find(ProductEntity.class, id);
         product.setName(newName);
     }
 
     @Override
-    public void deleteProductById(Integer id) {
+    public void deleteProductById(String id) {
         ProductEntity product = entityManager.find(ProductEntity.class, id);
         entityManager.remove(product);
     }
 
     @Override
-    public void clearPurchaseOptionsByProductId(Integer id) {
+    public void clearPurchaseOptionsByProductId(String id) {
         Query query = entityManager.createNativeQuery("DELETE FROM purchase_option WHERE product_id = :id");
         query.setParameter("id", id);
         query.executeUpdate();
     }
 
     @Override
-    public void deletePurchaseOptionById(Integer purchaseOptionId) {
+    public void deletePurchaseOptionById(String purchaseOptionId) {
         Query query = entityManager.createNativeQuery("DELETE FROM purchase_option WHERE id = :id");
         query.setParameter("id", purchaseOptionId);
         query.executeUpdate();

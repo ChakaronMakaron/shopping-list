@@ -54,7 +54,7 @@ public class ProductController {
     }
 
     @GetMapping(Endpoints.GET_PURCHASE_OPTIONS)
-    public String getPurchaseOptions(@RequestParam("id") Integer id, Model model) {
+    public String getPurchaseOptions(@RequestParam("id") String id, Model model) {
         ProductEntity product = productService.getProductById(id);
         List<PurchaseOptionEntity> purchaseOptions = product.getPurchaseOptions();
         model.addAttribute("purchaseOptions", isNull(purchaseOptions) ? Collections.emptyList() : purchaseOptions);
@@ -64,7 +64,7 @@ public class ProductController {
     }
 
     @GetMapping(Endpoints.RENAME_PRODUCT)
-    public String renameProduct(@RequestParam("id") Integer id, Model model) {
+    public String renameProduct(@RequestParam("id") String id, Model model) {
         ProductEntity product = productService.getProductById(id);
         model.addAttribute("product", product);
         return Views.RENAME_PRODUCT;
@@ -77,19 +77,19 @@ public class ProductController {
     }
 
     @GetMapping(Endpoints.DELETE_PRODUCT)
-    public String deleteProduct(@RequestParam("id") Integer id) {
+    public String deleteProduct(@RequestParam("id") String id) {
         productService.deleteProductById(id);
         return REDIRECT_TO_PRODUCTS_LIST;
     }
 
     @GetMapping(Endpoints.CLEAR_PURCHASE_OPTIONS)
-    public String clearPurchaseOptions(@RequestParam("id") Integer id) {
+    public String clearPurchaseOptions(@RequestParam("id") String id) {
         productService.clearPurchaseOptionsById(id);
         return REDIRECT_TO_PRODUCTS_LIST;
     }
 
     @GetMapping(Endpoints.ADD_PURCHASE_OPTION)
-    public String addPurchaseOption(@RequestParam("id") Integer productId, Model model) {
+    public String addPurchaseOption(@RequestParam("id") String productId, Model model) {
         model.addAttribute("purchaseOption", new PurchaseOptionEntity());
         // For returning back to this product's options
         // from purchase option creation form
@@ -99,14 +99,14 @@ public class ProductController {
 
     @PostMapping(Endpoints.ADD_PURCHASE_OPTION)
     public String addPurchaseOption(@ModelAttribute("purchaseOption") PurchaseOption purchaseOption,
-                                    @RequestParam("id") Integer productId) {
+                                    @RequestParam("id") String productId) {
         
         productService.addPurchaseOptionToProduct(purchaseOption, productId);
         return String.format(REDIRECT_TO_PURCHASE_OPTIONS, productId);
     }
 
     @GetMapping(Endpoints.DELETE_PURCHASE_OPTION)
-    public String deletePurchaseOption(@RequestParam("id") Integer productOptionId, @RequestParam("productId") Integer productId) {
+    public String deletePurchaseOption(@RequestParam("id") String productOptionId, @RequestParam("productId") String productId) {
         productService.deletePurchaseOptionById(productOptionId);
         return String.format(REDIRECT_TO_PURCHASE_OPTIONS, productId);
     }
