@@ -43,10 +43,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional(isolation = Isolation.READ_COMMITTED)
     public void addPurchaseOptionToProduct(PurchaseOption purchaseOption, String productId) {
-        ProductEntity product = productRepository.getProductByIdForUpdate(productId);
-        PurchaseOptionEntity purchaseOptionEntity =
+        ProductEntity productEntity = productRepository.getProductByIdForUpdate(productId);
+        PurchaseOptionEntity newPurchaseOptionEntity =
             new PurchaseOptionEntity(purchaseOption.getLink(), purchaseOption.getShopName(), generateId());
-        product.addPurchaseOption(purchaseOptionEntity);
+        productEntity.addPurchaseOption(newPurchaseOptionEntity);
+        newPurchaseOptionEntity.setProduct(productEntity);
     }
 
     @Override
